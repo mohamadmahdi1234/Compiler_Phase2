@@ -8,5 +8,16 @@ public class Pre_Processor {
     public Pre_Processor(String input) {
         this.input = input;
     }
+    public String handle_define(){
+        find_defines();
+        change_defined_values();
+        return input;
+    }
+    public void find_defines(){
+
+    }
+    public void change_defined_values(){
+
+    }
 
 }
