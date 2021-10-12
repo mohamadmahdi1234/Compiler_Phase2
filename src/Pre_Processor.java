@@ -13,10 +13,10 @@ public class Pre_Processor {
 
     public Pre_Processor(String input) {
         this.input = input;
-        first_two_par_of_define=Pattern.compile("(?<= |^)define\\s+[A-Za-z]+[a-zA-Z0-9]*");
-        all_define_expression=Pattern.compile("(?<= |^)define\\s+[A-Za-z]+[a-zA-Z0-9]*.*");
-        holder="(?<= |^|\\[|\\]|\\(|\\)|[+ * \\- / % < <= > >= = += \\-= *= /= == != \\&& \\|| ! ; , \\.])";
-        holder1="(?= |^|\\[|\\]|\\(|\\)|[+ * \\- / % < <= > >= = += \\-= *= /= == != \\&& \\|| ! ; , \\.])";
+        first_two_par_of_define=Pattern.compile("(?<= |^|\n)define\\s+[A-Za-z]+[a-zA-Z0-9]*");
+        all_define_expression=Pattern.compile("(?<= |^|\n)define\\s+[A-Za-z]+[a-zA-Z0-9]*.*");
+        holder="(?<= |^|[+ * \\- / % < <= > >= = += \\-= *= /= == != \\&& \\|| ! ; , \\. \n ]|[\\( \\) \\{ \\}])";
+        holder1="(?= |^|$|[+ * \\- / % < <= > >= = += \\-= *= /= == != \\&& \\|| ! ; , \\. \n ]|[\\( \\) \\{ \\}])";
         define_value=new HashMap<>();
     }
     public String handle_define(){
@@ -27,7 +27,6 @@ public class Pre_Processor {
     public void find_defines(){
         Matcher all_def=all_define_expression.matcher(input);
         Matcher first_two=first_two_par_of_define.matcher(input);
-        String answer=input;
         while(all_def.find()){
             first_two.find();
             define_value.put(first_two.group().split("\\s+")[1],input.substring(first_two.end(),all_def.end()).trim());
@@ -36,6 +35,7 @@ public class Pre_Processor {
             first_two=first_two_par_of_define.matcher(input);
         }
         input=input.trim();
+
     }
     public void change_defined_values(){
         for (String key:define_value.keySet()) {
@@ -55,6 +55,7 @@ public class Pre_Processor {
                 }
                 first=defined_in_string.matcher(input);
                 second=defined_variable.matcher(input);
+
             }
         }
         input.trim();
@@ -62,7 +63,7 @@ public class Pre_Processor {
 
     public static void main(String[] args) {
         String s="define PI 3.14159265359\n" +
-                " define FOR100 for ( i = 0 ; i < 100; i++)\n" +
+                "define FOR100 for ( i = 0 ; i < 100; i++)\n" +
                 " int main ( ) {\n" +
                 " int i ;\n" +
                 " FOR100 {\n" +
