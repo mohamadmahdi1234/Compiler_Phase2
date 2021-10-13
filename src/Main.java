@@ -1,8 +1,12 @@
 import java.io.File;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.*;
+import java.util.*;
 
 public class Main {
+    //this is for our test script
     public static void main(String[] args) {
         if (args.length < 4) {
             System.out.println("Usage: java Main -i <input> -o <output>");
@@ -59,4 +63,16 @@ public class Main {
             e.printStackTrace();
         }
     }
+    //this is for quera test and should implement and return string
+    public static String run(java.io.File inputFile) throws Exception {
+        StringBuilder str = new StringBuilder();
+        /*Lexer scanner = new Lexer(new FileReader(inputFile));
+        while (true) {
+            str.append(
+                    scanner.text.toString());
+
+        }*/
+        return str.toString();
+    }
+
 }
