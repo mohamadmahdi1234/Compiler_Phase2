@@ -1,6 +1,6 @@
 %%
 %public
-%class Lexer
+%class Scanner
 %unicode
 %line
 %column
