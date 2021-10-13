@@ -67,7 +67,7 @@ public class Main {
     }
     //this is for quera test and should implement and return string
     public static String run(java.io.File inputFile) throws Exception {
-       return "";
+        return "";
     }
 
 }
