@@ -1,6 +1,6 @@
 %%
 %public
-%class Scanner
+%class Scanner_phase1
 %unicode
 %line
 %column
