@@ -15,8 +15,8 @@ public class Pre_Processor {
         this.input = input;
         first_two_par_of_define=Pattern.compile("(?<= |^|\n)define\\s+[A-Za-z]+[a-zA-Z0-9]*");
         all_define_expression=Pattern.compile("(?<= |^|\n)define\\s+[A-Za-z]+[a-zA-Z0-9]*.*");
-        holder="(?<= |^|[+ * \\- / % < <= > >= = += \\-= *= /= == != \\&& \\|| ! ; , \\. \n ]|[\\( \\) \\{ \\}])";
-        holder1="(?= |^|$|[+ * \\- / % < <= > >= = += \\-= *= /= == != \\&& \\|| ! ; , \\. \n ]|[\\( \\) \\{ \\}])";
+        holder="(?<= |^|\\[|\\]|[+ * \\- / % < <= > >= = += \\-= *= /= == != \\&& \\|| ! ; , \\. \n ]|[\\( \\) \\{ \\}])";
+        holder1="(?= |^|$|\\[|\\]|[+ * \\- / % < <= > >= = += \\-= *= /= == != \\&& \\|| ! ; , \\. \n ]|[\\( \\) \\{ \\}])";
         define_value=new HashMap<>();
     }
     public String handle_define(){
