@@ -3,6 +3,8 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.*;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
 import java.util.*;
 
 public class Main {
@@ -65,14 +67,13 @@ public class Main {
     }
     //this is for quera test and should implement and return string
     public static String run(java.io.File inputFile) throws Exception {
-        StringBuilder str = new StringBuilder();
-        /*Lexer scanner = new Lexer(new FileReader(inputFile));
-        while (true) {
-            str.append(
-                    scanner.text.toString());
+        String input= Files.readString(inputFile.toPath(), StandardCharsets.ISO_8859_1);
+        Pre_Processor p=new Pre_Processor(input);
+        String define_handeled=p.handle_define();
+        return "";
 
-        }*/
-        return str.toString();
+
+
     }
 
 }
