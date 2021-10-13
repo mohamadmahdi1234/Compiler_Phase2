@@ -67,17 +67,7 @@ public class Main {
     }
     //this is for quera test and should implement and return string
     public static String run(java.io.File inputFile) throws Exception {
-        String input= Files.readString(inputFile.toPath(), StandardCharsets.ISO_8859_1);
-        Pre_Processor p=new Pre_Processor(input);
-        String define_handeled=p.handle_define();
-        Scanner scanner=new Scanner(new StringReader(define_handeled));
-        while(true){
-            String a=scanner.yylex();
-            if(a==null){
-                break;
-            }
-        }
-        return scanner.answer.toString();
+       return "";
     }
 
 }
