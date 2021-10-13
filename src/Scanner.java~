@@ -584,7 +584,7 @@ private void handle_key_words(String s){
    * @return the next token.
    * @exception java.io.IOException if any I/O-Error occurs.
    */
-  public Yytoken yylex() throws java.io.IOException {
+  public String yylex() throws java.io.IOException {
     int zzInput;
     int zzAction;
 
