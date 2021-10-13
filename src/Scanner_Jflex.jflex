@@ -22,7 +22,9 @@ __func__|__line__| bool| break| btoi| class| continue| define| double| dtoi| els
 if| import| int| itob| itod| new| NewArray| null| Print| private| public| ReadInteger|
 ReadLine|return| string| this| void| while      {handle_key_words(yytext());}
 /*handel string*/
-{string}                  {answer.append("T_STRINGLITERAL "+yytext());}
+{string}                  {answer.append("T_STRINGLITERAL "+yytext()+"\n");}
+/*handel boolean*/
+true|false                {answer.append("T_BOOLEANLITERAL "+yytext()+"\n");}
 /*handel comments*/
 {all_type_of_comment}     {}
 /*handel whitespace*/
