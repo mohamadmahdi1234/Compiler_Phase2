@@ -32,4 +32,3 @@ true|false                {answer.append("T_BOOLEANLITERAL "+yytext()+"\n");}
 {white_space}             {}
 /*handel error*/
 [^]                        {answer=new StringBuilder();answer.append("error");}
-
