@@ -70,10 +70,14 @@ public class Main {
         String input= Files.readString(inputFile.toPath(), StandardCharsets.ISO_8859_1);
         Pre_Processor p=new Pre_Processor(input);
         String define_handeled=p.handle_define();
-        return "";
-
-
-
+        Scanner scanner=new Scanner(new StringReader(define_handeled));
+        while(true){
+            String a=scanner.yylex();
+            if(a==null){
+                break;
+            }
+        }
+        return scanner.answer.toString();
     }
 
 }

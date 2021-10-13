@@ -4,6 +4,7 @@
 %unicode
 %line
 %column
+%type String
 %{
 StringBuilder answer=new StringBuilder();
 private void handle_key_words(String s){
