@@ -21,7 +21,6 @@ double=\d+\.\d*[eE][-+]?\d+
 integer=\d+
 int16 = [0]+[xX][0-9a-fA-F]+
 identifire=[a-zA-Z][a-zA-Z0-9_]*
-char = \".\"
 %%
 /*handle keywords*/
 __func__|__line__| bool| break| btoi| class| continue| define| double| dtoi| else| for|
@@ -37,7 +36,7 @@ true|false                {answer.append("T_BOOLEANLITERAL "+yytext()+"\n");}
 {white_space}             {}
 /*handle operators*/
 "&&" | "||" | "!" | "!=" | "<" | "<=" | ">" | ">=" | "%" | "/" | "/=" | "*" | "*=" | "=" | "==" |
-"+" | "+=" | "++" | "- " | "-=" | "--" | "." | "," | ";" | "(" | ")" | "{" | "}" | "[" | "]" {handle_key_words(yytext());}
+"+" | "+=" | "++" | "- " | "-=" | "--" | "." | "," | ";" | "(" | ")" | "{" | "}" | "[" | "]"|\" {handle_key_words(yytext());}
 /*handle integer*/
 {integer} | {int16}                  {answer.append("T_INTLITERAL "+yytext()+"\n");}
 /*handle double*/
