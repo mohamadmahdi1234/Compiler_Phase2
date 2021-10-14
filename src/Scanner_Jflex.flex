@@ -19,7 +19,7 @@ string=\"[[^\n\r\"\\]|\\t|\\r|\\n|\'|\\|\\\"]+\"
 double=\d+\.\d*[eE][-+]?\d+
 integer=\d+
 int16 = [0]+[xX][0-9a-fA-F]+
-
+identifire=[a-zA-Z][a-zA-Z0-9_]*
 %%
 /*handle keywords*/
 __func__|__line__| bool| break| btoi| class| continue| define| double| dtoi| else| for|
@@ -36,12 +36,12 @@ true|false                {answer.append("T_BOOLEANLITERAL "+yytext()+"\n");}
 /*handle operators*/
 "&&" | "||" | "!" | "!=" | "<" | "<=" | ">" | ">=" | "%" | "/" | "/=" | "*" | "*=" | "=" | "==" |
 "+" | "+=" | "++" | "- " | "-=" | "--" | "." | "," | ";" | "(" | ")" | "{" | "}" | "[" | "]" {handle_key_words(yytext());}
-/*handle string*/
+/*handle integer*/
 {integer} | {int16}                  {answer.append("T_INTLITERAL "+yytext()+"\n");}
-/*handle string*/
+/*handle double*/
 {double}                  {answer.append("T_DOUBLELITERAL "+yytext()+"\n");}
 /*handle identifiers*/
-[a-zA-Z][a-zA-Z0-9_]* {answer.append("T_ID "+yytext()+"\n");}
+{identifire}               {answer.append("T_ID "+yytext()+"\n");}
 /*handel error*/
 [^]                        {answer=new StringBuilder();answer.append("error");}
 
