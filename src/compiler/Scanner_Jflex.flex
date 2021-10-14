@@ -25,7 +25,7 @@ identifire=[a-zA-Z][a-zA-Z0-9_]*
 /*handle keywords*/
 __func__|__line__| bool| break| btoi| class| continue| define| double| dtoi| else| for|
 if| import| int| itob| itod| new| NewArray| null| Print| private| public| ReadInteger|
-ReadLine|return| string| this| void| while      {handle_key_words(yytext());}
+ReadLine| return| string| this| void| while     {handle_key_words(yytext());}
 /*handle string*/
 {string}                  {answer.append("T_STRINGLITERAL "+yytext()+"\n");}
 /*handle boolean*/

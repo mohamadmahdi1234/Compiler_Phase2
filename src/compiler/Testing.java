@@ -6,7 +6,7 @@ import java.io.IOException;
 
 public class Testing {
     public static void main(String[] args) throws IOException {
-        File s=new File("C:\\Users\\NeginPardaz\\Desktop\\java\\tests\\t14-macro2.in");
+        File s=new File("C:\\Users\\NeginPardaz\\Desktop\\java\\tests\\t02-keyword1.in");
         try {
             System.out.println(Main.run(s));
         }catch (Exception e){
