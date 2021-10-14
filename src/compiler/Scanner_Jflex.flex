@@ -21,6 +21,7 @@ double=\d+\.\d*[eE][-+]?\d+
 integer=\d+
 int16 = [0]+[xX][0-9a-fA-F]+
 identifire=[a-zA-Z][a-zA-Z0-9_]*
+char = \".\"
 %%
 /*handle keywords*/
 __func__|__line__| bool| break| btoi| class| continue| define| double| dtoi| else| for|
@@ -45,4 +46,3 @@ true|false                {answer.append("T_BOOLEANLITERAL "+yytext()+"\n");}
 {identifire}               {answer.append("T_ID "+yytext()+"\n");}
 /*handel error*/
 [^]                        {answer=new StringBuilder();answer.append("error");}
-
