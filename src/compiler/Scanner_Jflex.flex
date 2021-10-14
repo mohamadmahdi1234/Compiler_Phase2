@@ -1,3 +1,4 @@
+package compiler;
 %%
 %public
 %class Scanner_phase1

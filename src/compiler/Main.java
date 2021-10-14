@@ -1,3 +1,5 @@
+package compiler;
+
 import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
@@ -13,7 +15,7 @@ public class Main {
     //this is for our test script
     public static void main(String[] args) {
         if (args.length < 4) {
-            System.out.println("Usage: java Main -i <input> -o <output>");
+            System.out.println("Usage: java compiler.Main -i <input> -o <output>");
             return;
         }
         String inputFileName = null;
@@ -88,7 +90,8 @@ public class Main {
                 break;
             }
         }
-        return scanner.answer.toString();
+        String ans=scanner.answer.toString();
+        return ans.substring(0,ans.length()-1);
     }
 
 }
