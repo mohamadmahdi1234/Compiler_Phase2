@@ -33,8 +33,6 @@ true|false                {answer.append("T_BOOLEANLITERAL "+yytext()+"\n");}
 {all_type_of_comment}     {}
 /*handle whitespace*/
 {white_space}             {}
-/*handle error*/
-[^]                        {answer=new StringBuilder();answer.append("error");}
 /*handle operators*/
 "&&" | "||" | "!" | "!=" | "<" | "<=" | ">" | ">=" | "%" | "/" | "/=" | "*" | "*=" | "=" | "==" |
 "+" | "+=" | "++" | "- " | "-=" | "--" | "." | "," | ";" | "(" | ")" | "{" | "}" | "[" | "]" {handle_key_words(yytext());}
