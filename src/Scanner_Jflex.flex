@@ -8,7 +8,7 @@
 %{
 StringBuilder answer=new StringBuilder();
 private void handle_key_words(String s){
-    answer.append(s);
+    answer.append(s+"\n");
 }
 %}
 all_type_of_comment={comment_type_one}|{comment_type_two}
@@ -16,20 +16,30 @@ comment_type_one="/*" [^*] ~"*/"
 comment_type_two="//".*
 white_space=\r|\n|\r\n|\t|\f
 string=\"[[^\n\r\"\\]|\\t|\\r|\\n|\'|\\|\\\"]+\"
+double=\d+\.\d*[eE][-+]?\d+
+integer=\d+
 
 %%
-/*handel keywords*/
+/*handle keywords*/
 __func__|__line__| bool| break| btoi| class| continue| define| double| dtoi| else| for|
 if| import| int| itob| itod| new| NewArray| null| Print| private| public| ReadInteger|
 ReadLine|return| string| this| void| while      {handle_key_words(yytext());}
-/*handel string*/
+/*handle string*/
 {string}                  {answer.append("T_STRINGLITERAL "+yytext()+"\n");}
-/*handel boolean*/
+/*handle boolean*/
 true|false                {answer.append("T_BOOLEANLITERAL "+yytext()+"\n");}
-/*handel comments*/
+/*handle comments*/
 {all_type_of_comment}     {}
-/*handel whitespace*/
+/*handle whitespace*/
 {white_space}             {}
-/*handel error*/
+/*handle error*/
 [^]                        {answer=new StringBuilder();answer.append("error");}
-
+/*handle operators*/
+"&&" | "||" | "!" | "!=" | "<" | "<=" | ">" | ">=" | "%" | "/" | "/=" | "*" | "*=" | "=" | "==" |
+"+" | "+=" | "++" | "-" | "-=" | "--" | "." | "," | ";" | "(" | ")" | "{" | "}" | "[" | "]" {handle_key_words(yytext());}
+/*handle string*/
+{integer}                  {answer.append("T_INTLITERAL "+yytext()+"\n");}
+/*handle string*/
+{double}                  {answer.append("T_DOUBLELITERAL "+yytext()+"\n");}
+/*handle identifiers*/
+[a-zA-Z][a-zA-Z0-9_]* {answer.append("T_ID "+yytext()+"\n");}
