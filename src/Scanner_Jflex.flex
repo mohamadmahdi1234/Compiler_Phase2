@@ -18,7 +18,7 @@ white_space=\r|\n|\r\n|\t|\f
 string=\"[[^\n\r\"\\]|\\t|\\r|\\n|\'|\\|\\\"]+\"
 double=\d+\.\d*[eE][-+]?\d+
 integer=\d+
-int16 = [0][xX][0-9a-fA-F]+
+int16 = [0]+[xX][0-9a-fA-F]+
 
 %%
 /*handle keywords*/
@@ -33,10 +33,6 @@ true|false                {answer.append("T_BOOLEANLITERAL "+yytext()+"\n");}
 {all_type_of_comment}     {}
 /*handle whitespace*/
 {white_space}             {}
-<<<<<<< HEAD:src/Scanner_Jflex.jflex
-/*handel error*/
-[^]                        {answer=new StringBuilder();answer.append("error");}
-=======
 /*handle error*/
 [^]                        {answer=new StringBuilder();answer.append("error");}
 /*handle operators*/
@@ -48,4 +44,6 @@ true|false                {answer.append("T_BOOLEANLITERAL "+yytext()+"\n");}
 {double}                  {answer.append("T_DOUBLELITERAL "+yytext()+"\n");}
 /*handle identifiers*/
 [a-zA-Z][a-zA-Z0-9_]* {answer.append("T_ID "+yytext()+"\n");}
->>>>>>> 7f45c00ad56e926be1b85986155b7ec4faa56527:src/Scanner_Jflex.flex
+/*handel error*/
+[^]                        {answer=new StringBuilder();answer.append("error");}
+
