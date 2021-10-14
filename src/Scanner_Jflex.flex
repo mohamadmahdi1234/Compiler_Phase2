@@ -14,7 +14,7 @@ private void handle_key_words(String s){
 all_type_of_comment={comment_type_one}|{comment_type_two}
 comment_type_one="/*" [^*] ~"*/"
 comment_type_two="//".*
-white_space=\r|\n|\r\n|\t|\f
+white_space=\r|\n|\r\n|\t|\f|\s
 string=\"[[^\n\r\"\\]|\\t|\\r|\\n|\'|\\|\\\"]+\"
 double=\d+\.\d*[eE][-+]?\d+
 integer=\d+
