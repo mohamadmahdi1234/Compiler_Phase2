@@ -12,12 +12,13 @@ public class Pre_Processor {
     String holder;
     String holder1;
 
+
     public Pre_Processor(String input) {
         this.input = input;
         first_two_par_of_define=Pattern.compile("(?<= |^|\n)define\\s+[A-Za-z]+[a-zA-Z0-9]*");
         all_define_expression=Pattern.compile("(?<= |^|\n)define\\s+[A-Za-z]+[a-zA-Z0-9]*.*");
-        holder="(?<= |^|\\[|\\]|[+ * \\- / % < <= > >= = += \\-= *= /= == != \\&& \\|| ! ; , \\. \n ]|[\\( \\) \\{ \\}])";
-        holder1="(?= |^|$|\\[|\\]|[+ * \\- / % < <= > >= = += \\-= *= /= == != \\&& \\|| ! ; , \\. \n ]|[\\( \\) \\{ \\}])";
+        holder="(?<= |^|\\[|\\]|[+ * \\- / % < <= > >= = += \\-= *= /= ==  != \\&& \\|| ! ; , \\. \n ]|[\\( \\) \\{ \\}])";
+        holder1="(?= |^|$|\\[|\\]|[+ * \\- / % < <= > >= = += \\-= *= /= ==  != \\&& \\|| ! ; , \\. \n ]|[\\( \\) \\{ \\}])";
         define_value=new HashMap<>();
     }
     public String handle_define(){
@@ -36,36 +37,31 @@ public class Pre_Processor {
             first_two=first_two_par_of_define.matcher(input);
         }
         input=input.trim();
-
-
     }
     public void change_defined_values(){
 
         for (String key:define_value.keySet()) {
             Pattern defined_variable=Pattern.compile(holder+key+holder1);
+            Pattern quot_beside=Pattern.compile("\\\""+key+"|"+key+"\\\""+"|"+"\\\""+key+"\\\"");
             Matcher second=defined_variable.matcher(input);
             while (second.find()){
-                if(second.group().length()!=key.length()){
-                String[]s=second.group().split(key);
-                input=input.substring(0,second.start())+s[0]+define_value.get(key)+s[1]+input.substring(second.end());
-                }else{
                     input=input.substring(0,second.start())+define_value.get(key)+input.substring(second.end());
-                }
-                second=defined_variable.matcher(input);
+                     second=defined_variable.matcher(input);
             }
-
+            input=input.replaceAll("\""+key+holder1,"\""+define_value.get(key));
+            input=input.replaceAll(holder+key+"\"",define_value.get(key)+"\"");
+            input=input.replaceAll("\""+key+holder1+"\"","\""+define_value.get(key)+"\"");
         }
-
         input.trim();
-
     }
 
     public static void main(String[] args) {
-        String s=" define SEMICOLON ;\n" +
+        String s="define SEMICOLON ;\n" +
                 "define FOR100 for(i = 0; i < 100; i += 1)\n" +
                 "\n" +
-                "FOR100\n" +
+                " \"FOR100 sal\n" +
                 "Print(i)SEMICOLON";
+
         Pre_Processor p=new Pre_Processor(s);
         System.out.println(p.handle_define());
     }
