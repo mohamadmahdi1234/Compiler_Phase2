@@ -38,7 +38,6 @@ true|false                {answer.append("T_BOOLEANLITERAL "+yytext()+"\n");}
 /*handle operators*/
 "&&" | "||" | "!" | "!=" | "<" | "<=" | ">" | ">=" | "%" | "/" | "/=" | "*" | "*=" | "=" | "==" |
 "+" | "+="  | "-" | "-="  | "." | "," | ";" | "(" | ")" | "{" | "}" | "[" | "]"|\"|\'|"”"|\\n {handle_key_words(yytext());}
-
 /*handle integer*/
 {integer} | {int16}                  {answer.append("T_INTLITERAL "+yytext()+"\n");}
 /*handle double*/
