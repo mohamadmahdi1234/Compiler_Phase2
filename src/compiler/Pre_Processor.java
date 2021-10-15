@@ -50,7 +50,7 @@ public class Pre_Processor {
             }
             input=input.replaceAll("\""+key+holder1,"\""+define_value.get(key));
             input=input.replaceAll(holder+key+"\"",define_value.get(key)+"\"");
-            input=input.replaceAll("\""+key+holder1+"\"","\""+define_value.get(key)+"\"");
+            input=input.replaceAll("\""+key+"\"","\""+define_value.get(key)+"\"");
         }
         input.trim();
     }
