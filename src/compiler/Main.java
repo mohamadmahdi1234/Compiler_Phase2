@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.io.*;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
+import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.*;
 import java.util.stream.Stream;
@@ -32,23 +33,32 @@ public class Main {
         }
         String outputPath = "out/" + outputFileName;
         createFile(outputPath);
+        Path path=Paths.get("in/"+inputFileName);
+        StringBuilder contentBuilder=new StringBuilder();
+        try (Stream<String> stream = Files.lines(path, StandardCharsets.UTF_8))
+        {
+            stream.forEach(s -> contentBuilder.append(s).append("\n"));
+        }
+        catch (IOException e)
+        {
+            e.printStackTrace();
+        }
+        String input=contentBuilder.toString();
+        Pre_Processor p=new Pre_Processor(input);
+        String define_handeled=p.handle_define();
+        Scanner_phase1 scanner=new Scanner_phase1(new StringReader(define_handeled.trim()));
+        try {
+            while(true){
+                String a=scanner.yylex();
+                if(a==null){
+                    break;
+                }
+            }
+        }catch (Exception e){}
 
-        // Read the input file and write to the output file.
-
-        String[] lines = {
-                "class",
-                "T_ID Program",
-                "{",
-                "void",
-                "T_ID main",
-                "(",
-                ")",
-                "{",
-                "}",
-                "}"
-        };
-
-        writeContentToFile(outputPath, lines);
+        String ans=scanner.answer.toString();
+        String[]answer=ans.split("\n");
+        writeContentToFile(outputPath,answer);
     }
 
     private static boolean createFile(String path) {
