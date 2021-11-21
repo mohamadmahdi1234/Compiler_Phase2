@@ -8,8 +8,6 @@ public class Pre_Processor {
     private Pattern first_two_par_of_define;
     private Map<String,String> define_value;
     String input;
-
-
     public Pre_Processor(String input) {
         this.input = input;
         first_two_par_of_define=Pattern.compile("(?<= |^|\n)define(?<=\\S)\\h+(?=\\S)[A-Za-z]+[a-zA-Z0-9_]*");
