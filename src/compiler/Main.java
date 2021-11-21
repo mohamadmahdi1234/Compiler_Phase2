@@ -102,6 +102,7 @@ public class Main {
         }
         String ans=scanner.answer.toString();
         return ans.substring(0,ans.length()-1);
+
     }
 
 }

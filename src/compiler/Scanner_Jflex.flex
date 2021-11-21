@@ -16,7 +16,7 @@ all_type_of_comment={comment_type_one}|{comment_type_two}
 comment_type_one="/*" [^*] ~"*/"
 comment_type_two="//".*
 white_space=\r|\n|\r\n|\t|\f|\s
-string=\"[[^\r\n\"] \\t \\r \\n \’ \\” \' \\ \\\"]+\"
+string=\"([^\"\r\n]| \\t| \\r |\\n| \\\" |\\| \\')*\"
 double=\d+\.\d*[eE][-+]?\d+
 double1=\d+\.\d*
 integer=\d+
@@ -38,7 +38,7 @@ true|false                {answer.append("T_BOOLEANLITERAL "+yytext()+"\n");}
 {white_space}             {}
 /*handle operators*/
 "&&" | "||" | "!" | "!=" | "<" | "<=" | ">" | ">=" | "%" | "/" | "/=" | "*" | "*=" | "=" | "==" |
-"+" | "+="  | "-" | "-="  | "." | "," | ";" | "(" | ")" | "{" | "}" | "[" | "]"|\"|\'|"”"|\\n {handle_key_words(yytext());}
+"+" | "+="  | "-" | "-="  | "." | "," | ";" | "(" | ")" | "{" | "}" | "[" | "]"|\"|\'|"”"|\\n|\\\" {handle_key_words(yytext());}
 /*handle integer*/
 {integer} | {int16}                  {answer.append("T_INTLITERAL "+yytext()+"\n");}
 /*handle double*/
@@ -46,5 +46,5 @@ true|false                {answer.append("T_BOOLEANLITERAL "+yytext()+"\n");}
 /*handle identifiers*/
 {identifire}               {answer.append("T_ID "+yytext()+"\n");}
 /*handel error*/
-[^]                        {answer.append(yytext()+"\n");}
+[^]                        {answer.append("error");}
 
