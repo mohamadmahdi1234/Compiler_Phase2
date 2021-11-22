@@ -47,6 +47,14 @@ precedence left     DOT, OPENBRACKET;
 precedence left     OPENBRACE;
 //grammer
 start with Program;
+Program ::= MacroStar Decl DeclStar;
+MacroStar ::= Macro MacroStar | ;
+DeclStar ::= Decl DeclStar | ;
+Macro ::= IMPORT T_STRINGLITERAL ;
+Decl ::= VariableDecl | FunctionDecl | ClassDecl;
+VariableDecl ::= Variable SEMICOLON;
+Variable ::= Type T_ID;
+Type ::= INT | DOUBLE | BOOL | STRING | T_ID | Type OP_CL_BRACKET;
 
 
 

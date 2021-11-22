@@ -101,7 +101,7 @@ true|false                {answer.append("T_BOOLEANLITERAL "+yytext()+"\n");
 "[]"                        {return token(sym.OP_CL_BRACKET);}
 /*handle integer*/
 {integer} | {int16}                  {answer.append("T_INTLITERAL "+yytext()+"\n");
-                                       return token(sum.T_INTLITERAL);}
+                                       return token(sym.T_INTLITERAL);}
 /*handle double*/
 {double} |{double1}                 {answer.append("T_DOUBLELITERAL "+yytext()+"\n");
                                      return token(sym.T_DOUBLELITERAL);}
