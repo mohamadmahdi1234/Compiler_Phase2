@@ -9,12 +9,11 @@ import java_cup.runtime.*;
 %type Symbol
 %cup
 %{
-StringBuilder answer=new StringBuilder();
-private void handle_key_words(String s){
-    answer.append(s+"\n");
-}
+
 public Symbol token (int tokenType) {
+        System.out.println(yytext());
 	    return new Symbol(tokenType,yytext());
+
 	}
 %}
 all_type_of_comment={comment_type_one}|{comment_type_two}
@@ -60,10 +59,10 @@ this                        {return token(sym.THIS);}
 void                        {return token(sym.VOID);}
 while                       {return token(sym.WHILE);}
 /*handle string*/
-{string}                  {answer.append("T_STRINGLITERAL "+yytext()+"\n");
+{string}                  {
                            return token(sym.T_STRINGLITERAL);  }
 /*handle boolean*/
-true|false                {answer.append("T_BOOLEANLITERAL "+yytext()+"\n");
+true|false                {
                             return token(sym.T_BOOLEANLITERAL);}
 /*handle comments*/
 {all_type_of_comment}     {}
@@ -100,14 +99,13 @@ true|false                {answer.append("T_BOOLEANLITERAL "+yytext()+"\n");
 "]"                         {return token(sym.CLOSEBRACKET);}
 "[]"                        {return token(sym.OP_CL_BRACKET);}
 /*handle integer*/
-{integer} | {int16}                  {answer.append("T_INTLITERAL "+yytext()+"\n");
+{integer} | {int16}                  {
                                        return token(sym.T_INTLITERAL);}
 /*handle double*/
-{double} |{double1}                 {answer.append("T_DOUBLELITERAL "+yytext()+"\n");
+{double} |{double1}                 {
                                      return token(sym.T_DOUBLELITERAL);}
 /*handle identifiers*/
-{identifire}               {answer.append("T_ID "+yytext()+"\n");
+{identifire}               {
                             return token(sym.T_ID);}
-/*handel error*/
-[^]                        {answer.append("error");}
+
 

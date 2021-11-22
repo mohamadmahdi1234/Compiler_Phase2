@@ -23,7 +23,7 @@ public class Main {
         }
         catch (IOException e)
         {
-            e.printStackTrace();
+
         }
         String input=contentBuilder.toString();
         Pre_Processor p=new Pre_Processor(input);
