@@ -73,11 +73,11 @@ true|false                {answer.append("T_BOOLEANLITERAL "+yytext()+"\n");
 "&&"                        {return token(sym.AND);}
 "||"                        {return token(sym.OR);}
 "!"                         {return token(sym.NOT);}
-"!="                        {return token(sym.NOT_ASSIGN);}
+"!="                        {return token(sym.NOT_EQUAL);}
 "<"                         {return token(sym.LESS);}
-"<="                        {return token(sym.LESS_ASSIGN);}
+"<="                        {return token(sym.LESS_EQUAL);}
 ">"                         {return token(sym.GREATER);}
-">="                        {return token(sym.GREATER_ASSIGN);}
+">="                        {return token(sym.GREATER_EQUAL);}
 "%"                         {return token(sym.MODE);}
 "/"                         {return token(sym.DIVIDE);}
 "/="                        {return token(sym.DIVIDE_ASSIGN);}
@@ -98,7 +98,7 @@ true|false                {answer.append("T_BOOLEANLITERAL "+yytext()+"\n");
 "}"                         {return token(sym.CLOSECURLY);}
 "["                         {return token(sym.OPENBRACKET);}
 "]"                         {return token(sym.CLOSEBRACKET);}
-
+"[]"                        {return token(sym.OP_CL_BRACKET);}
 /*handle integer*/
 {integer} | {int16}                  {answer.append("T_INTLITERAL "+yytext()+"\n");
                                        return token(sum.T_INTLITERAL);}
