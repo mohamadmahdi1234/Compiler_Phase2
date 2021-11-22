@@ -17,19 +17,19 @@ terminal T_ID;
 terminal T_STRINGLITERAL,T_BOOLEANLITERAL,T_INTLITERAL,T_DOUBLELITERAL;
 //arithmatic operator terminals
 terminal MODE,DIVIDE,DIVIDE_ASSIGN,
-TIME,TIME_ASSIGN,PLUS,PLUS_ASSIGN,MINUS,MINUS_ASSIGN;
+TIME,TIME_ASSIGN,PLUS,PLUS_ASSIGN,MINUS,MINUS_ASSIGN,ASSIGN;
 //logic terminals
-terminal NOT,NOT_EQUAL,AND,OR,LESS,LESS_EQUAL,GREATER,GREATER_EQUAL;
+terminal NOT,NOT_EQUAL,AND,OR,LESS,LESS_EQUAL,GREATER,GREATER_EQUAL,EQUAL;
 //other terminals
 terminal DOT,COMMA,SEMICOLON,OPENBRACE,CLOSEBRACE,OPENCURLY,CLOSECURLY,
 OPENCURLY,OPENBRACKET,CLOSEBRACKET,OP_CL_BRACKET;
 //NON_TERMINALS IN ORIGIN GRAMMER
 nonterminal Program,Macro,Decl, VariableDecl, Variable,Type,
-FunctionDecl,Formals,ClassDecl,Fileld,AccessMode,StmtBlock,
+FunctionDecl,Formals,ClassDecl,Field,AccessMode,StmtBlock,
 Stmt,IfStmt,WhileStmt,ForStmt,ReturnStmt,BreakStmt,ContinueStmt,
 PrintStmt,Expr,LValue,Call,Actuals,Constant;
 //NON_TERMINALS we defined
-nonterminal MacroStar,DeclStar;
+nonterminal MacroStar,DeclStar,VariableComma,FieldStar,VariableDeclStar,StmtStar,Expr_zero_one,ExprComma;
 
 //end
 //precedence and assosiatives
@@ -55,6 +55,41 @@ Decl ::= VariableDecl | FunctionDecl | ClassDecl;
 VariableDecl ::= Variable SEMICOLON;
 Variable ::= Type T_ID;
 Type ::= INT | DOUBLE | BOOL | STRING | T_ID | Type OP_CL_BRACKET;
+functionDecl ::= Type T_ID OPENBRACE Formals CLOSEBRACE StmtBlock
+                 | VOID T_ID OPENBRACE Formals CLOSEBRACE StmtBlock;
+Formals ::=  Variable VariableComma | ;
+VariableComma ::= COMMA Variable VariableComma | ;
+ClassDecl ::= CLASS T_ID OPENCURLY FieldStar CLOSECURLY;
+FieldStar ::= Field FieldStar | ;
+Field ::= AccessMode VariableDecl | AccessMode FunctionDecl;
+AccessMode ::= PRIVATE | PUBLIC | ;
+StmtBlock ::= OPENCURLY VariableDeclStar StmtStar CLOSECURLY;
+VariableDeclStar ::= VariableDecl VariableDeclStar | ;
+StmtStar ::= Stmt StmtStar | ;
+Stmt ::= Expr SEMICOLON | SEMICOLON | IfStmt | WhileStmt | ForStmt | BreakStmt | ContinueStmt
+            | ReturnStmt | PrintStmt | StmtBlock;
+IfStmt ::= IF OPENBRACE Expr CLOSEBRACE Stmt | IF OPENBRACE Expr CLOSEBRACE Stmt ELSE Stmt;
+WhileStmt ::= WHILE OPENBRACE Expr CLOSEBRACE Stmt;
+ForStmt ::= FOR OPENBRACE Expr_zero_one SEMICOLON Expr SEMICOLON Expr_zero_one CLOSEBRACE Stmt;
+ReturnStmt ::= RETURN Expr_zero_one SEMICOLON;
+BreakStmt ::= BREAK SEMICOLON;
+ContinueStmt ::= CONTINUE SEMICOLON;
+Expr_zero_one ::= Expr | ;
+PrintStmt ::= PRINT OPENBRACE Expr ExprComma CLOSEBRACE SEMICOLON;
+ExprComma ::= COMMA Expr ExprComma | ;
+Expr ::= LValue ASSGIN Expr
+         | LValue PLUS_ASSIGN Expr | LValue MINUS_ASSIGN Expr | LValue TIME_ASSIGN Expr | LValue DIVIDE_ASSIGN Expr
+         | Constant | LValue | THIS | Call | OPENBRACE Expr CLOSEBRACE
+         | Expr PLUS Expr | Expr MINUS Expr | Expr TIME Expr | Expr DIVIDE Expr | Expr MODE Expr | MINUS Expr
+         | Expr LESS Expr | Expr LESS_EQUAL Expr | Expr GREATER Expr | Expr GREATER_EQUAL Expr | Expr EQUAL Expr | Expr NOT_EQUAL Expr
+         | Expr AND Expr | Expr OR Expr | NOT Expr
+         | READINTEGER OPENBRACE CLOSEBRACE | NEW T_ID | READLINE OPENBRACE CLOSEBRACE | NEWARRAY OPENBRACE Expr COMMA Type CLOSEBRACE
+         | ITOD OPENBRACE Expr CLOSEBRACE | DTOI OPENBRACE Expr CLOSEBRACE | ITOB OPENBRACE Expr CLOSEBRACE | BTOI OPENBRACE Expr CLOSEBRACE
+         | LINE | FUNC;
+LValue ::= T_ID | Expr DOT T_ID | Expr OPENBRACKET Expr CLOSEBRACKET;
+Call ::= T_ID OPENBRACE Actuals CLOSEBRACE | Expr DOT T_ID OPENBRACE Actuals CLOSEBRACE;
+Actuals ::= Expr ExprComma | ;
+Constant ::= T_INTLITERAL | T_DOUBLELITERAL | T_BOOLEANLITERAL | T_STRINGLITERAL | NULL;
 
 
 
